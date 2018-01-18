@@ -1,0 +1,63 @@
+{
+    "type": "SERVICE_REQUEST",
+    "priority": "HIGH",
+    "classification":
+        [
+            {
+                "classification": "BASIC_TECHNICAL_SKILLS"
+            }
+        ],
+    "mixins" :
+    {
+        "collectors_info" :
+            [
+                {
+                    "classification": "BASIC_TECHNICAL_SKILLS"
+                }
+            ]
+    },
+    "metadata" :
+    {
+        "mixins" :
+        {
+            "collectors_info" : {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "title": "Service ticket classifications schema",
+                "type": "array",
+                "items":
+                {
+                    "$schema": "http://json-schema.org/draft-04/schema#",
+                    "title": "Service ticket classification schema",
+                    "type": "object",
+                    "properties":
+                    {
+                        "active":
+                        {
+                            "type": "boolean",
+                            "description": "Activation/deactivation flag for the ticket classfication"
+                        },
+                        "classification":
+                        {
+                            "type": "string",
+                            "description": "Technical key of the service ticket classification"
+                        },
+                        "description":
+                        {
+                            "$ref": "https://api.yaas.io/patterns/v1/schema-localized.json",
+                            "description": "Human-readable and translatable description of the service ticket classification"
+                        }
+                    },
+                    "required": ["classification"]
+                }
+            }
+        }
+    },
+    "status": "IN_PROCESS",
+    "dueAt": "2015-06-30T23:59:59.999+0000",
+    "customerId": "C0750876755",
+    "productId" : "54e60e07d26ec374ee8e769f",
+    "shortDescription" : "Request for regular maintenance",
+    "assignedTo": "mandy@hybristest.com",
+    "createdBy": "mandy@hybristest.com",
+    "modifiedBy": "mandy@hybristest.com"
+}

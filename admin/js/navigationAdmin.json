@@ -1,0 +1,18 @@
+{
+    "navigationList":[
+        {
+            "id":"LogonUser",
+            "icon":"ion-wrench",
+            "subNavigationList":[
+                {
+                    "id":"Role",
+                    "url":"RoleList.html"
+                },
+                {
+                    "id":"LogonUser",
+                    "url":"LogonUserList.html"
+                }
+            ]
+        }
+    ]
+}

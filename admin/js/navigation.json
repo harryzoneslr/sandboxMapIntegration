@@ -1,0 +1,14 @@
+{
+    "navigationList":[
+        {
+            "id":"production",
+            "url":"navigationProduction.json",
+            "defaultUrl":"mapBasic.html"
+        },
+        {
+            "id":"system",
+            "url":"navigationAdmin.json",
+            "defaultUrl":"LogonUserList.html"
+        }
+    ]
+}

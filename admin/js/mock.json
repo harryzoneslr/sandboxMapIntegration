@@ -1,0 +1,81 @@
+{
+    "customerId": "C0750876755",
+    "agentId": "mandy@hybristest.com",
+    "agentTitle": "Ms.",
+    "agentFirstName": "Mandy",
+    "agentLastName": "Smith",
+    "interactionStartedAt": "2016-07-19T14:10:00.000+0000",
+    "interactionEndedAt": "2016-07-19T14:15:00.000+0000",
+    "communicationStartedAt": "2016-07-19T14:10:20.000+0000",
+    "communicationEndedAt": "2016-07-19T14:14:20.000+0000",
+    "interactionReasons": [
+        {
+            "interactionReason": "PRODUCT_INQUIRY"
+        }
+    ],
+    "interactionDescription": "Customer called to ask about the configuration of a bike in the web shop.  Assisted the customer with the configuration.",
+    "communicationDirection": "INBOUND",
+    "communicationOrigin": "STOREFRONT",
+    "communicationMedium": "WEBRTC_VIDEO",
+    "communicationSystemInteractionId": "12345000001",
+    "mixins" :
+    {
+        "collectors_info" :
+        {
+            "CollectorsValue":
+            {
+                "usd": 30.99,
+                "eur": 23.99
+            }
+        }
+    },
+    "relatedObjects": [
+        {
+            "objectType": "ZSAP_FIN_DOCUMENT_MANAGE",
+            "objectId": "1900003456",
+            "objectName": "1900003456",
+            "objectDetails": [
+                {
+                    "keyName":"AccountDocument",
+                    "keyValue":"1900003456"
+                },
+                {
+                    "keyName":"CompanyCode",
+                    "keyValue":"FQM1"
+                },
+                {
+                    "keyName":"FiscalYear",
+                    "keyValue":"2017"
+                }
+
+            ]
+        },
+        {
+            "objectType": "ZSAP_FIN_DOCUMENT_MANAGE",
+            "objectId": "1900003457",
+            "objectName": "1900003457",
+            "objectDetails": [
+                {
+                    "keyName":"AccountDocument",
+                    "keyValue":"1900003457"
+                },
+                {
+                    "keyName":"CompanyCode",
+                    "keyValue":"FQM1"
+                },
+                {
+                    "keyName":"FiscalYear",
+                    "keyValue":"2017"
+                }
+
+            ]
+        }
+    ],
+    "metadata" :
+    {
+        "mixins" :
+        {
+            "collectors_info" : "https://devportal.yaas.io/services/document/latest/download/comicCollectorValue_v1.json"
+        }
+    }
+}
