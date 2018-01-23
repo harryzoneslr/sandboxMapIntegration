@@ -67,6 +67,7 @@ require( ["Navigation"], function(navigation) {
                 for(var i= 0; i < this.customerList.length; i++){
                     var marker = new AMap.Marker({
                         map: this.map,
+                        icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
                         position: this.customerList[i].coordinates
                     });
                 }
