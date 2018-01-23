@@ -18,28 +18,28 @@ require( ["Navigation"], function(navigation) {
                     index: 1,
                     address: '成都市青羊区鼓楼南街117号',
                     phone:'028-86512242',
-                    coordinates:[104.0404, 30.4002]
+                    coordinates:[104.0711, 30.6632]
                 },
                 {
                     custName:'成都天府鑫谷软件园',
                     index: 2,
                     address: '成都市武侯区府城大道西段399号',
                     phone:'028-82345654',
-                    coordinates:[104.0303, 30.3530]
+                    coordinates:[104.0564, 30.5870]
                 },
                 {
                     custName:'成都软件园E区',
                     index: 3,
                     address: '成都市高新区天府大道1366号天府软件园E区',
                     phone:'028-83245688',
-                    coordinates:[104.0355, 30.3227]
+                    coordinates:[104.0684, 30.5370]
                 },
                 {
                     custName:'美城云庭住宅区',
                     index: 4,
                     address: '成都市双流区剑南大道南段338号',
                     phone:'028-85295110',
-                    coordinates:[104.0235, 30.3211]
+                    coordinates:[104.0454, 30.5350]
                 }
             ]
         },
