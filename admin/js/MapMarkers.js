@@ -90,7 +90,6 @@ require( ["Navigation"], function(navigation) {
                 $("#x_map_addressInfo").height(800);
             },
 
-
             // define infoWindow
             createInfoWindow: function (title, content) {
                 var vm = this;
