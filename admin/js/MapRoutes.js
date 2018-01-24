@@ -18,113 +18,35 @@ require( ["Navigation"], function(navigation) {
                     index: 1,
                     address: '成都市青羊区鼓楼南街117号',
                     phone:'028-86512242',
-                    coordinates:[104.0405, 30.3957]
+                    coordinates:[104.0711, 30.6632]
                 },
                 {
                     custName:'成都天府鑫谷软件园',
                     index: 2,
                     address: '成都市武侯区府城大道西段399号',
                     phone:'028-82345654',
-                    coordinates:[104.0405, 30.3957]
+                    coordinates:[104.0564, 30.5870]
                 },
                 {
                     custName:'成都软件园E区',
                     index: 3,
                     address: '成都市高新区天府大道1366号天府软件园E区',
                     phone:'028-83245688',
-                    coordinates:[104.0405, 30.3957]
+                    coordinates:[104.0684, 30.5370]
                 },
                 {
                     custName:'美城云庭住宅区',
                     index: 4,
                     address: '成都市双流区剑南大道南段338号',
                     phone:'028-85295110',
-                    coordinates:[104.0405, 30.3957]
+                    coordinates:[104.0454, 30.5350]
                 }
             ]
         },
 
         ready: function () {
-            navigation.loadNavigation($('#sidebar-menu'), 'MapMarkers');
-            // Connection the web socket
-            var vm = this;
-            vm.map = new AMap.Map('x_map_addressInfo', {
-                resizeEnable: true,
-                zoom: 11,
-                center: [104.049298, 30.546702]
-            });
-            var marker0 = new AMap.Marker({
-                icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
-                position: [104.049298, 30.546702]
-            });
-            marker0.setMap(vm.map);
-
-
-
-
-            var aRoutingOption = [];
-            var union1 = [];
-            union1.push(104.053787);
-            union1.push(30.53792);
-
-
-            var union2 = [];
-            union2.push(104.049298);
-            union2.push(30.546702);
-            aRoutingOption.push(union2);
-
-            var union3 = [];
-            union3.push(104.048745);
-            union3.push(30.55115);
-            aRoutingOption.push(union3);
-
-            var union4 = [];
-            union4.push(104.05568);
-            union4.push(30.586697);
-
-
-            var marker1 = new AMap.Marker({
-                map: vm.map,
-                position: union3,
-
-                icon: new AMap.Icon({
-                    size: new AMap.Size(40, 50),  //图标大小
-                    image: "http://webapi.amap.com/theme/v1.3/images/newpc/way_btn2.png",
-                    imageOffset: new AMap.Pixel(0, -60)
-                })
-            });
-
-            var marker2 = new AMap.Marker({
-                map: vm.map,
-                position: union2,
-
-                icon: new AMap.Icon({
-                    size: new AMap.Size(40, 50),  //图标大小
-                    image: "http://webapi.amap.com/theme/v1.3/images/newpc/way_btn2.png",
-                    imageOffset: new AMap.Pixel(0, -60)
-                })
-            });
-
-
-
-//        vm.map2 = new AMap.Map('x_map_addressInfo', {
-//            resizeEnable: true,
-//            zoom: 11,
-//            center: [116.397428, 39.90923]
-//        });
-
-            var marker3 = new AMap.Marker({
-                map: vm.map,
-                position: union3,
-
-                icon: new AMap.Icon({
-                    size: new AMap.Size(40, 50),  //图标大小
-                    image: "http://webapi.amap.com/theme/v1.3/images/newpc/way_btn2.png",
-                    imageOffset: new AMap.Pixel(0, -60)
-                })
-            });
-
-            $("#x_map_addressInfo").height(800);
+            navigation.loadNavigation($('#sidebar-menu'), 'MapRoutes');
+            this.refreshOnMap();
         },
 
         methods: {
@@ -133,28 +55,81 @@ require( ["Navigation"], function(navigation) {
                 this.searchOnAddressMap(this.content.addressInfo);
             },
 
-            searchByLongLatitude: function () {
+            refreshOnMap: function(){
                 var vm = this;
-                console.log("latitude:" + vm.content.latitude);
-                console.log("longitude:" + vm.content.longitude);
-                vm.map.panTo([vm.content.latitude, vm.content.longitude]);
 
-                var marker = new AMap.Marker({
-                    icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
-                    position: [vm.content.latitude, vm.content.longitude]
+                // init map
+                vm.map = {};
+                vm.map = new AMap.Map(this.elMap, {
+                    resizeEnable: true,
+                    zoom: 11,
+                    center: [104.049298, 30.546702]
                 });
-                marker.setMap(vm.map);
 
+                // create marker
+                for(var i= 0; i < vm.customerList.length; i++){
+                    var marker = new AMap.Marker({
+                        map: vm.map,
+                        icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
+                        position: vm.customerList[i].coordinates
+                    });
+                    var title = vm.customerList[i].custName;
+                    var content ="联系电话 ：" + vm.customerList[i].phone;
+                    marker.content = vm.createInfoWindow(title, content);
+                    marker.on('click', function (e) {
+                        var infoWindow = new AMap.InfoWindow({
+                            isCustom: true,
+                            content: e.target.content,
+                            offset: new AMap.Pixel(16, -45)
+                        });
+                        infoWindow.open(e.target.getMap(), e.target.getPosition());
+                    });
+                    marker.emit('click', {target: marker});
+                }
+
+                // ! important set the height of map.
+                $("#x_map_addressInfo").height(800);
             },
 
-            clearMarker: function(){
+            // define infoWindow
+            createInfoWindow: function (title, content) {
                 var vm = this;
-                vm.marker1.setMap(null);
-                vm.marker2.setMap(null);
-                vm.map.remove(vm.marker1);
-                vm.map.remove(vm.marker2);
-                //vm.map.remove( vm.map.getAllOverlays("marker"));
-                //vm.map.getAllOverlays("marker")[2].setMap(null);
+                var info = document.createElement("div");
+                info.className = "info";
+
+                // define top
+                var top = document.createElement("div");
+                var titleD = document.createElement("div");
+                var closeX = document.createElement("img");
+                top.className = "info-top";
+                titleD.innerHTML = title;
+                closeX.src = "http://webapi.amap.com/images/close2.gif";
+                closeX.onclick = function () {
+                    vm.map.clearInfoWindow();
+                };
+
+                top.appendChild(titleD);
+                top.appendChild(closeX);
+                info.appendChild(top);
+
+                // define middle content
+                var middle = document.createElement("div");
+                middle.className = "info-middle";
+                middle.style.backgroundColor = 'white';
+                middle.innerHTML = content;
+                info.appendChild(middle);
+
+                // define bottom
+                var bottom = document.createElement("div");
+                bottom.className = "info-bottom";
+                bottom.style.position = 'relative';
+                bottom.style.top = '0px';
+                bottom.style.margin = '0 auto';
+                var sharp = document.createElement("img");
+                sharp.src = "http://webapi.amap.com/images/sharp.png";
+                bottom.appendChild(sharp);
+                info.appendChild(bottom);
+                return info;
             },
 
             // hanlder method for send message
