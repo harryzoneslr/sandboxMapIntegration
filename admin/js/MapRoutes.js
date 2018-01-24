@@ -18,28 +18,28 @@ require( ["Navigation"], function(navigation) {
                     index: 1,
                     address: '成都市青羊区鼓楼南街117号',
                     phone:'028-86512242',
-                    coordinates:[104.0405, 30.3957]
+                    coordinates:[104.0711, 30.6632]
                 },
                 {
                     custName:'成都天府鑫谷软件园',
                     index: 2,
                     address: '成都市武侯区府城大道西段399号',
                     phone:'028-82345654',
-                    coordinates:[104.049298, 30.4215]
+                    coordinates:[104.0564, 30.5870]
                 },
                 {
                     custName:'成都软件园E区',
                     index: 3,
                     address: '成都市高新区天府大道1366号天府软件园E区',
                     phone:'028-83245688',
-                    coordinates:[104.053787, 30.546702]
+                    coordinates:[104.0684, 30.5370]
                 },
                 {
                     custName:'美城云庭住宅区',
                     index: 4,
                     address: '成都市双流区剑南大道南段338号',
                     phone:'028-85295110',
-                    coordinates:[104.053787, 30.53792]
+                    coordinates:[104.0454, 30.5350]
                 }
             ]
         },
@@ -130,30 +130,6 @@ require( ["Navigation"], function(navigation) {
                 bottom.appendChild(sharp);
                 info.appendChild(bottom);
                 return info;
-            },
-
-            searchByLongLatitude: function () {
-                var vm = this;
-                console.log("latitude:" + vm.content.latitude);
-                console.log("longitude:" + vm.content.longitude);
-                vm.map.panTo([vm.content.latitude, vm.content.longitude]);
-
-                var marker = new AMap.Marker({
-                    icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
-                    position: [vm.content.latitude, vm.content.longitude]
-                });
-                marker.setMap(vm.map);
-
-            },
-
-            clearMarker: function(){
-                var vm = this;
-                vm.marker1.setMap(null);
-                vm.marker2.setMap(null);
-                vm.map.remove(vm.marker1);
-                vm.map.remove(vm.marker2);
-                //vm.map.remove( vm.map.getAllOverlays("marker"));
-                //vm.map.getAllOverlays("marker")[2].setMap(null);
             },
 
             // hanlder method for send message
