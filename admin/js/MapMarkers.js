@@ -55,24 +55,81 @@ require( ["Navigation"], function(navigation) {
                 this.searchOnAddressMap(this.content.addressInfo);
             },
 
-
-
             refreshOnMap: function(){
-                this.map = {};
-                this.map = new AMap.Map(this.elMap, {
+                var vm = this;
+
+                // init map
+                vm.map = {};
+                vm.map = new AMap.Map(this.elMap, {
                     resizeEnable: true,
                     zoom: 11,
                     center: [104.049298, 30.546702]
                 });
-                for(var i= 0; i < this.customerList.length; i++){
+
+                // create marker
+                for(var i= 0; i < vm.customerList.length; i++){
                     var marker = new AMap.Marker({
-                        map: this.map,
+                        map: vm.map,
                         icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
-                        position: this.customerList[i].coordinates
+                        position: vm.customerList[i].coordinates
                     });
+                    var title = vm.customerList[i].custName;
+                    var content ="联系电话 ：" + vm.customerList[i].phone;
+                    marker.content = vm.createInfoWindow(title, content);
+                    marker.on('click', function (e) {
+                        var infoWindow = new AMap.InfoWindow({
+                            isCustom: true,
+                            content: e.target.content,
+                            offset: new AMap.Pixel(16, -45)
+                        });
+                        infoWindow.open(e.target.getMap(), e.target.getPosition());
+                    });
+                    marker.emit('click', {target: marker});
                 }
                 // ! important set the height of map.
                 $("#x_map_addressInfo").height(800);
+            },
+
+
+            // define infoWindow
+            createInfoWindow: function (title, content) {
+                var vm = this;
+                var info = document.createElement("div");
+                info.className = "info";
+
+                // define top
+                var top = document.createElement("div");
+                var titleD = document.createElement("div");
+                var closeX = document.createElement("img");
+                top.className = "info-top";
+                titleD.innerHTML = title;
+                closeX.src = "http://webapi.amap.com/images/close2.gif";
+                closeX.onclick = function () {
+                    vm.map.clearInfoWindow();
+                };
+
+                top.appendChild(titleD);
+                top.appendChild(closeX);
+                info.appendChild(top);
+
+                // define middle content
+                var middle = document.createElement("div");
+                middle.className = "info-middle";
+                middle.style.backgroundColor = 'white';
+                middle.innerHTML = content;
+                info.appendChild(middle);
+
+                // define bottom
+                var bottom = document.createElement("div");
+                bottom.className = "info-bottom";
+                bottom.style.position = 'relative';
+                bottom.style.top = '0px';
+                bottom.style.margin = '0 auto';
+                var sharp = document.createElement("img");
+                sharp.src = "http://webapi.amap.com/images/sharp.png";
+                bottom.appendChild(sharp);
+                info.appendChild(bottom);
+                return info;
             },
 
             // hanlder method for send message
