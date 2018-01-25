@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="09bcee15-3e04-49c0-afae-a809b39d9ba2" name="Default" comment="">
+    <list default="true" id="09bcee15-3e04-49c0-afae-a809b39d9ba2" name="Default" comment="add routeplan">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/admin/js/MapMarkers.js" afterPath="$PROJECT_DIR$/admin/js/MapMarkers.js" />
       <change beforePath="$PROJECT_DIR$/admin/js/MapRoutes.js" afterPath="$PROJECT_DIR$/admin/js/MapRoutes.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -21,9 +20,11 @@
       <file leaf-file-name="MapRoutes.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/MapRoutes.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6625">
-              <caret line="375" column="67" lean-forward="false" selection-start-line="375" selection-start-column="67" selection-end-line="375" selection-end-column="67" />
-              <folding />
+            <state relative-caret-position="63">
+              <caret line="294" column="2" lean-forward="false" selection-start-line="294" selection-start-column="2" selection-end-line="294" selection-end-column="2" />
+              <folding>
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -31,13 +32,10 @@
       <file leaf-file-name="MapRoutes.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/js/MapRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="679">
-              <caret line="133" column="12" lean-forward="false" selection-start-line="133" selection-start-column="12" selection-end-line="133" selection-end-column="12" />
+            <state relative-caret-position="-507">
+              <caret line="75" column="59" lean-forward="false" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
               <folding>
-                <element signature="e#1755#3228#0" expanded="false" />
-                <element signature="e#3320#4890#0" expanded="false" />
-                <element signature="e#5004#6467#0" expanded="false" />
-                <marker date="1516780098199" expanded="true" signature="6119:6134" ph="..." />
+                <element signature="e#3364#4934#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -107,8 +105,8 @@
         <option value="$PROJECT_DIR$/admin/js/Navi.js" />
         <option value="$PROJECT_DIR$/admin/js/Navigation.js" />
         <option value="$PROJECT_DIR$/admin/MapMarkers.html" />
-        <option value="$PROJECT_DIR$/admin/MapRoutes.html" />
         <option value="$PROJECT_DIR$/admin/js/MapMarkers.js" />
+        <option value="$PROJECT_DIR$/admin/MapRoutes.html" />
         <option value="$PROJECT_DIR$/admin/js/MapRoutes.js" />
       </list>
     </option>
@@ -120,8 +118,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="605" />
-    <option name="width" value="1323" />
+    <option name="x" value="709" />
+    <option name="width" value="1219" />
     <option name="height" value="1088" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -234,7 +232,7 @@
       <workItem from="1516689950696" duration="894000" />
       <workItem from="1516776853809" duration="1121000" />
       <workItem from="1516778845484" duration="429000" />
-      <workItem from="1516779705021" duration="432000" />
+      <workItem from="1516779705021" duration="7675000" />
     </task>
     <task id="LOCAL-00001" summary="add infoWindow">
       <created>1516765873798</created>
@@ -257,18 +255,25 @@
       <option name="project" value="LOCAL" />
       <updated>1516779263040</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update from master">
+      <created>1516780152827</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1516780152828</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44778000" />
+    <option name="totallyTimeSpent" value="52021000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="605" y="0" width="1323" height="1088" extended-state="0" />
-    <editor active="true" />
+    <frame x="709" y="0" width="1219" height="1088" extended-state="0" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49582464" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942432" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -278,7 +283,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -295,6 +299,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add infoWindow" />
+    <MESSAGE value="update from master" />
     <MESSAGE value="add routeplan" />
     <option name="LAST_COMMIT_MESSAGE" value="add routeplan" />
   </component>
@@ -309,7 +314,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3458">
           <caret line="182" column="72" lean-forward="false" selection-start-line="182" selection-start-column="62" selection-end-line="182" selection-end-column="72" />
-          <folding />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -325,10 +332,7 @@
         <state relative-caret-position="380">
           <caret line="20" column="20" lean-forward="false" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
           <folding>
-            <element signature="e#1755#3228#0" expanded="false" />
-            <element signature="e#3320#4890#0" expanded="false" />
-            <element signature="e#5004#6467#0" expanded="false" />
-            <marker date="1516780098199" expanded="true" signature="6119:6134" ph="..." />
+            <element signature="e#3364#4934#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -648,14 +652,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/MapRoutes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6625">
-          <caret line="375" column="67" lean-forward="false" selection-start-line="375" selection-start-column="67" selection-end-line="375" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/js/MapMarkers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -668,15 +664,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/admin/MapRoutes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="294" column="2" lean-forward="false" selection-start-line="294" selection-start-column="2" selection-end-line="294" selection-end-column="2" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/js/MapRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="133" column="12" lean-forward="false" selection-start-line="133" selection-start-column="12" selection-end-line="133" selection-end-column="12" />
+        <state relative-caret-position="-507">
+          <caret line="75" column="59" lean-forward="false" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
           <folding>
-            <element signature="e#1755#3228#0" expanded="false" />
-            <element signature="e#3320#4890#0" expanded="false" />
-            <element signature="e#5004#6467#0" expanded="false" />
-            <marker date="1516780098199" expanded="true" signature="6119:6134" ph="..." />
+            <element signature="e#3364#4934#0" expanded="false" />
           </folding>
         </state>
       </provider>

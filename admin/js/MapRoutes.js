@@ -51,9 +51,9 @@ require( ["Navigation"], function(navigation) {
 
         methods: {
 
-            searchOnMap: function () {
-                this.searchOnAddressMap(this.content.addressInfo);
-            },
+            // searchOnMap: function () {
+            //     this.searchOnAddressMap(this.content.addressInfo);
+            // },
 
             refreshOnMap: function(){
                 var vm = this;
@@ -86,6 +86,8 @@ require( ["Navigation"], function(navigation) {
                     });
                     marker.emit('click', {target: marker});
                 }
+
+                 vm.planRoutes();
 
                 // ! important set the height of map.
                 $("#x_map_addressInfo").height(800);
@@ -132,36 +134,23 @@ require( ["Navigation"], function(navigation) {
                 return info;
             },
 
-            // hanlder method for send message
-            searchOnAddressMap: function (location) {
-
+            planRoutes: function () {
                 var vm = this;
+                var length = vm.customerList.length;
+                var start = vm.customerList[0].coordinates;
+                var end = vm.customerList[length - 1].coordinates;
+                var path = [];
+                for (var i = 1; i < length - 1; i++) {
+                    path.push(vm.customerList[i].coordinates);
+                }
 
-                var localSearch = new BMap.LocalSearch(vm.map, { renderOptions: { map: vm.map, autoViewport: true} });
-                vm.map.clearOverlays(); // Clear the old markers on map
-
-                localSearch.setSearchCompleteCallback(function (searchResult) {
-                    var poi = searchResult.getPoi(0);
-                    if (!poi) {
-                        alert("没有找到地址！");
-                        return;
-                    }
-                    var latitude = poi.point.lat;
-                    var longitude = poi.point.lng;
-                    // set on page
-                    vm.content.latitude = latitude;
-                    vm.content.longitude = longitude;
-                    vm.map.centerAndZoom(poi.point, 13);
-                    var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat));  // Create new mark
-                    vm.map.addOverlay(marker);
-                    var content = "<br/><br/>经度：" + poi.point.lng + "<br/>纬度：" + poi.point.lat;
-                    var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + content + "</p>");
-                    marker.addEventListener("click", function () {
-                        this.openInfoWindow(infoWindow);
+                AMap.plugin(["AMap.Driving"], function () {
+                    var driving = new AMap.Driving({
+                        map: vm.map,
+                        hideMarkers: true
                     });
-                    // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //GIF cartoon
+                    driving.search(start, end, {waypoints: path});
                 });
-                localSearch.search(location);
             }
         }
     });
