@@ -50,11 +50,6 @@ require( ["Navigation"], function(navigation) {
         },
 
         methods: {
-
-            // searchOnMap: function () {
-            //     this.searchOnAddressMap(this.content.addressInfo);
-            // },
-
             refreshOnMap: function(){
                 var vm = this;
 
@@ -68,7 +63,7 @@ require( ["Navigation"], function(navigation) {
 
                 // create marker
                 for(var i= 0; i < vm.customerList.length; i++){
-                    var marker = new AMap.Marker({
+                    var marker = new AMap.Marker({            
                         map: vm.map,
                         icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
                         position: vm.customerList[i].coordinates
@@ -132,6 +127,23 @@ require( ["Navigation"], function(navigation) {
                 bottom.appendChild(sharp);
                 info.appendChild(bottom);
                 return info;
+            }
+
+            refreshOnMap: function(){
+                this.map = {};
+                this.map = new AMap.Map(this.elMap, {
+                    resizeEnable: true,
+                    zoom: 11,
+                    center: [104.049298, 30.546702]
+                });
+                for(var i= 0; i < this.customerList.length; i++){
+                    var marker = new AMap.Marker({
+                        map: this.map,
+                        position: this.customerList[i].coordinates
+                    });
+                }
+                // ! important set the height of map.
+                $("#x_map_addressInfo").height(800);
             },
 
             planRoutes: function () {
