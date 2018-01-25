@@ -1,0 +1,25 @@
+plugins
+detect.js: detect platform version based on navigator.userAgent	
+fastclick.js: 提升移动端响应速度		FastClick.attach()
+jquery.slimscroll.js: scrollable area	$().slimcroll()
+jquery.blockUI.js: Ajax延迟时将browser block 遮罩		$.blockUI()
+wow.js: 页面滚动特效		wow = new WOW()
+waves.js: button/icon点击特效
+jquery.nicescroll.js: nice croll	$().niceScroll()
+jquery.scrollTo.js: scroll 	$().scrollTo()
+notify.js: notify	jquery, $.notify()
+magnific-popup: 响应式lightbox弹窗	$().magnificPopup()
+sweet-alert: 美化弹窗	swal()
+
+dataTable.js
+mindup-editabletable.js
+
+jquery.i18n.properties: 前端国际化
+commons.js: 
+bootstrap-treeview.js: tree
+select2.js: 选择
+parsley.js: 表单验证
+
+amap: 高德地图
+
+require.js: 引用js多时避免加载

@@ -50,12 +50,84 @@ require( ["Navigation"], function(navigation) {
         },
 
         methods: {
+            refreshOnMap: function(){
+                var vm = this;
 
-            searchOnMap: function () {
-                this.searchOnAddressMap(this.content.addressInfo);
+                // init map
+                vm.map = {};
+                vm.map = new AMap.Map(this.elMap, {
+                    resizeEnable: true,
+                    zoom: 11,
+                    center: [104.049298, 30.546702]
+                });
+
+                // create marker
+                for(var i= 0; i < vm.customerList.length; i++){
+                    var marker = new AMap.Marker({            
+                        map: vm.map,
+                        icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
+                        position: vm.customerList[i].coordinates
+                    });
+                    var title = vm.customerList[i].custName;
+                    var content ="联系电话 ：" + vm.customerList[i].phone;
+                    marker.content = vm.createInfoWindow(title, content);
+                    marker.on('click', function (e) {
+                        var infoWindow = new AMap.InfoWindow({
+                            isCustom: true,
+                            content: e.target.content,
+                            offset: new AMap.Pixel(16, -45)
+                        });
+                        infoWindow.open(e.target.getMap(), e.target.getPosition());
+                    });
+                    marker.emit('click', {target: marker});
+                }
+
+                 vm.planRoutes();
+
+                // ! important set the height of map.
+                $("#x_map_addressInfo").height(800);
             },
 
+            // define infoWindow
+            createInfoWindow: function (title, content) {
+                var vm = this;
+                var info = document.createElement("div");
+                info.className = "info";
 
+                // define top
+                var top = document.createElement("div");
+                var titleD = document.createElement("div");
+                var closeX = document.createElement("img");
+                top.className = "info-top";
+                titleD.innerHTML = title;
+                closeX.src = "http://webapi.amap.com/images/close2.gif";
+                closeX.onclick = function () {
+                    vm.map.clearInfoWindow();
+                };
+
+                top.appendChild(titleD);
+                top.appendChild(closeX);
+                info.appendChild(top);
+
+                // define middle content
+                var middle = document.createElement("div");
+                middle.className = "info-middle";
+                middle.style.backgroundColor = 'white';
+                middle.innerHTML = content;
+                info.appendChild(middle);
+
+                // define bottom
+                var bottom = document.createElement("div");
+                bottom.className = "info-bottom";
+                bottom.style.position = 'relative';
+                bottom.style.top = '0px';
+                bottom.style.margin = '0 auto';
+                var sharp = document.createElement("img");
+                sharp.src = "http://webapi.amap.com/images/sharp.png";
+                bottom.appendChild(sharp);
+                info.appendChild(bottom);
+                return info;
+            }
 
             refreshOnMap: function(){
                 this.map = {};
@@ -74,36 +146,23 @@ require( ["Navigation"], function(navigation) {
                 $("#x_map_addressInfo").height(800);
             },
 
-            // hanlder method for send message
-            searchOnAddressMap: function (location) {
-
+            planRoutes: function () {
                 var vm = this;
+                var length = vm.customerList.length;
+                var start = vm.customerList[0].coordinates;
+                var end = vm.customerList[length - 1].coordinates;
+                var path = [];
+                for (var i = 1; i < length - 1; i++) {
+                    path.push(vm.customerList[i].coordinates);
+                }
 
-                var localSearch = new BMap.LocalSearch(vm.map, { renderOptions: { map: vm.map, autoViewport: true} });
-                vm.map.clearOverlays(); // Clear the old markers on map
-
-                localSearch.setSearchCompleteCallback(function (searchResult) {
-                    var poi = searchResult.getPoi(0);
-                    if (!poi) {
-                        alert("没有找到地址！");
-                        return;
-                    }
-                    var latitude = poi.point.lat;
-                    var longitude = poi.point.lng;
-                    // set on page
-                    vm.content.latitude = latitude;
-                    vm.content.longitude = longitude;
-                    vm.map.centerAndZoom(poi.point, 13);
-                    var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat));  // Create new mark
-                    vm.map.addOverlay(marker);
-                    var content = "<br/><br/>经度：" + poi.point.lng + "<br/>纬度：" + poi.point.lat;
-                    var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + content + "</p>");
-                    marker.addEventListener("click", function () {
-                        this.openInfoWindow(infoWindow);
+                AMap.plugin(["AMap.Driving"], function () {
+                    var driving = new AMap.Driving({
+                        map: vm.map,
+                        hideMarkers: true
                     });
-                    // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //GIF cartoon
+                    driving.search(start, end, {waypoints: path});
                 });
-                localSearch.search(location);
             }
         }
     });
