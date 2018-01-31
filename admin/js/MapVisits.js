@@ -104,14 +104,24 @@ require( ["Navigation"], function(navigation) {
 
                 // create marker
                 for(var i= 0; i < vm.VisitRecord.length; i++){
-                    var marker = new AMap.Marker({
-                        map: vm.map,
-                        icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
-                        position: vm.VisitRecord[i].actualLngLats
-                    });
-                    vm.calDistance(vm.VisitRecord[i].actualLngLats, vm.VisitRecord[i].customerLngLats);
+                    // check status
+                    vm.VisitRecord[i].checkStatus = vm.calDistance(vm.VisitRecord[i].actualLngLats, vm.VisitRecord[i].customerLngLats);
                     var title = "客户名称： " + vm.customerList[i].custName;
                     var content ="联系电话 ：" + vm.customerList[i].phone;
+                    var flag = vm.VisitRecord[i].checkStatus;
+                    if (flag) {
+                        var marker = new AMap.Marker({
+                            map: vm.map,
+                            icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
+                            position: vm.VisitRecord[i].customerLngLats
+                        });
+                    } else {
+                        var marker = new AMap.Marker({
+                            map: vm.map,
+                            icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_r'+(i+1)+'.png',
+                            position: vm.VisitRecord[i].customerLngLats
+                        });
+                    }
                     marker.content = title + "</br>" + content;
                     marker.on('click', function (e) {
                         var infoWindow = new AMap.InfoWindow({
@@ -124,7 +134,7 @@ require( ["Navigation"], function(navigation) {
                     marker.emit('click', {target: marker});
                 }
 
-                vm.planRoutes();
+                vm.planRoutes(vm.VisitRecord);
 
                 // ! important set the height of map.
                 $("#x_map_addressInfo").height(800);
@@ -143,14 +153,14 @@ require( ["Navigation"], function(navigation) {
                 }
             },
 
-            planRoutes: function () {
+            planRoutes: function (postions) {
                 var vm = this;
-                var length = vm.customerList.length;
-                var start = vm.customerList[0].coordinates;
-                var end = vm.customerList[length - 1].coordinates;
+                var length = postions.length;
+                var start = postions[0].actualLngLats;
+                var end = postions[length - 1].actualLngLats;
                 var path = [];
                 for (var i = 1; i < length - 1; i++) {
-                    path.push(vm.customerList[i].coordinates);
+                    path.push(postions[i].actualLngLats);
                 }
 
                 AMap.plugin(["AMap.Driving"], function () {

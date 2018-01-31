@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09bcee15-3e04-49c0-afae-a809b39d9ba2" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/admin/MapVisits.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/admin/assets/plugins/vue-calendar/vue-calendar.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/admin/assets/plugins/vue-calendar/vue-calendar.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/admin/js/MapVisits.js" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/admin/MapBasic.html" afterPath="$PROJECT_DIR$/admin/MapBasic.html" />
-      <change beforePath="$PROJECT_DIR$/admin/MapMarkers.html" afterPath="$PROJECT_DIR$/admin/MapMarkers.html" />
-      <change beforePath="$PROJECT_DIR$/admin/MapRoutes.html" afterPath="$PROJECT_DIR$/admin/MapRoutes.html" />
-      <change beforePath="$PROJECT_DIR$/admin/js/Navigation.js" afterPath="$PROJECT_DIR$/admin/js/Navigation.js" />
+      <change beforePath="$PROJECT_DIR$/admin/js/MapVisits.js" afterPath="$PROJECT_DIR$/admin/js/MapVisits.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,8 +20,8 @@
       <file leaf-file-name="MapVisits.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/js/MapVisits.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="123" column="20" lean-forward="true" selection-start-line="123" selection-start-column="20" selection-end-line="123" selection-end-column="20" />
+            <state relative-caret-position="493">
+              <caret line="158" column="37" lean-forward="false" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
               <folding>
                 <element signature="e#398#1418#0" expanded="false" />
                 <element signature="e#416#646#0" expanded="false" />
@@ -52,7 +44,7 @@
       <file leaf-file-name="MapVisits.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/MapVisits.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-390">
+            <state relative-caret-position="1050">
               <caret line="230" column="81" lean-forward="false" selection-start-line="230" selection-start-column="81" selection-end-line="230" selection-end-column="81" />
               <folding>
                 <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -273,7 +265,7 @@
       <workItem from="1516779705021" duration="9075000" />
       <workItem from="1516865959807" duration="138000" />
       <workItem from="1517300134152" duration="7347000" />
-      <workItem from="1517367337237" duration="4609000" />
+      <workItem from="1517367337237" duration="5522000" />
     </task>
     <task id="LOCAL-00001" summary="add infoWindow">
       <created>1516765873798</created>
@@ -317,11 +309,18 @@
       <option name="project" value="LOCAL" />
       <updated>1517302326692</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="calculate distance">
+      <created>1517371949494</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1517371949494</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65515000" />
+    <option name="totallyTimeSpent" value="66428000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1098" extended-state="6" />
@@ -713,17 +712,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/index2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/MapVisits.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-390">
+        <state relative-caret-position="1050">
           <caret line="230" column="81" lean-forward="false" selection-start-line="230" selection-start-column="81" selection-end-line="230" selection-end-column="81" />
           <folding>
             <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -734,10 +725,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/admin/index2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/js/MapVisits.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="123" column="20" lean-forward="true" selection-start-line="123" selection-start-column="20" selection-end-line="123" selection-end-column="20" />
+        <state relative-caret-position="493">
+          <caret line="158" column="37" lean-forward="false" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
           <folding>
             <element signature="e#398#1418#0" expanded="false" />
             <element signature="e#416#646#0" expanded="false" />
