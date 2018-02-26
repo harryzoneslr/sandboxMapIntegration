@@ -19,6 +19,11 @@ define('Navigation', function() {
                                 "id":"MapRoutes",
                                 "url":"MapRoutes.html",
                                 "text":"Driving Routes"
+                            },
+                            {
+                                "id":"MapVisits",
+                                "url":"MapVisits.html",
+                                "text":"Visits Record"
                             }
                         ]
                     }

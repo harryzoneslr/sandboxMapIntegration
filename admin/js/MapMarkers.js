@@ -73,12 +73,12 @@ require( ["Navigation"], function(navigation) {
                         icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
                         position: vm.customerList[i].coordinates
                     });
-                    var title = vm.customerList[i].custName;
+                    var title = "客户名称： " + vm.customerList[i].custName;
                     var content ="联系电话 ：" + vm.customerList[i].phone;
-                    marker.content = vm.createInfoWindow(title, content);
+                    marker.content = title + "</br>" + content;
                     marker.on('click', function (e) {
                         var infoWindow = new AMap.InfoWindow({
-                            isCustom: true,
+                            isCustom: false,
                             content: e.target.content,
                             offset: new AMap.Pixel(16, -45)
                         });

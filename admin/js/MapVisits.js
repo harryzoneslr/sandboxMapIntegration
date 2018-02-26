@@ -41,11 +41,52 @@ require( ["Navigation"], function(navigation) {
                     phone:'028-85295110',
                     coordinates:[104.0454, 30.5350]
                 }
+            ],
+            VisitRoute:[
+                {
+                    employeeID:'i349035',
+                    index: 1,
+                    visitDate: '2018-01-31'
+                }
+            ],
+            VisitRecord: [
+                {
+                    index: 1,
+                    visitTime: '10:24am',
+                    actualLngLats: [104.0721, 30.6633],
+                    customerName: '成都日一新物流',
+                    customerLngLats: [104.0711, 30.6632],
+                    checkStatus: ''
+                },
+                {
+                    index: 2,
+                    visitTime: '11:25am',
+                    actualLngLats: [104.0566, 30.5880],
+                    customerName: '成都天府鑫谷软件园',
+                    customerLngLats: [104.0564, 30.5870],
+                    checkStatus: ''
+                },
+                {
+                    index: 3,
+                    visitTime: '10:24am',
+                    actualLngLats: [104.0683, 30.5360],
+                    customerName: '成都软件园E区',
+                    customerLngLats: [104.0684, 30.5370],
+                    checkStatus: ''
+                },
+                {
+                    index: 4,
+                    visitTime: '10:24am',
+                    actualLngLats: [104.0464, 30.5350],
+                    customerName: '美城云庭住宅区',
+                    customerLngLats: [104.0454, 30.5350],
+                    checkStatus: ''
+                }
             ]
         },
 
         ready: function () {
-            navigation.loadNavigation($('#sidebar-menu'), 'MapRoutes');
+            navigation.loadNavigation($('#sidebar-menu'), 'MapVisits');
             this.refreshOnMap();
         },
 
@@ -62,14 +103,25 @@ require( ["Navigation"], function(navigation) {
                 });
 
                 // create marker
-                for(var i= 0; i < vm.customerList.length; i++){
-                    var marker = new AMap.Marker({            
-                        map: vm.map,
-                        icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
-                        position: vm.customerList[i].coordinates
-                    });
+                for(var i= 0; i < vm.VisitRecord.length; i++){
+                    // check status
+                    vm.VisitRecord[i].checkStatus = vm.calDistance(vm.VisitRecord[i].actualLngLats, vm.VisitRecord[i].customerLngLats);
                     var title = "客户名称： " + vm.customerList[i].custName;
                     var content ="联系电话 ：" + vm.customerList[i].phone;
+                    var flag = vm.VisitRecord[i].checkStatus;
+                    if (flag) {
+                        var marker = new AMap.Marker({
+                            map: vm.map,
+                            icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
+                            position: vm.VisitRecord[i].customerLngLats
+                        });
+                    } else {
+                        var marker = new AMap.Marker({
+                            map: vm.map,
+                            icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_r'+(i+1)+'.png',
+                            position: vm.VisitRecord[i].customerLngLats
+                        });
+                    }
                     marker.content = title + "</br>" + content;
                     marker.on('click', function (e) {
                         var infoWindow = new AMap.InfoWindow({
@@ -82,78 +134,33 @@ require( ["Navigation"], function(navigation) {
                     marker.emit('click', {target: marker});
                 }
 
-                 vm.planRoutes();
+                vm.planRoutes(vm.VisitRecord);
 
                 // ! important set the height of map.
                 $("#x_map_addressInfo").height(800);
             },
 
-            // define infoWindow
-            createInfoWindow: function (title, content) {
-                var vm = this;
-                var info = document.createElement("div");
-                info.className = "info";
-
-                // define top
-                var top = document.createElement("div");
-                var titleD = document.createElement("div");
-                var closeX = document.createElement("img");
-                top.className = "info-top";
-                titleD.innerHTML = title;
-                closeX.src = "http://webapi.amap.com/images/close2.gif";
-                closeX.onclick = function () {
-                    vm.map.clearInfoWindow();
-                };
-
-                top.appendChild(titleD);
-                top.appendChild(closeX);
-                info.appendChild(top);
-
-                // define middle content
-                var middle = document.createElement("div");
-                middle.className = "info-middle";
-                middle.style.backgroundColor = 'white';
-                middle.innerHTML = content;
-                info.appendChild(middle);
-
-                // define bottom
-                var bottom = document.createElement("div");
-                bottom.className = "info-bottom";
-                bottom.style.position = 'relative';
-                bottom.style.top = '0px';
-                bottom.style.margin = '0 auto';
-                var sharp = document.createElement("img");
-                sharp.src = "http://webapi.amap.com/images/sharp.png";
-                bottom.appendChild(sharp);
-                info.appendChild(bottom);
-                return info;
-            }
-
-            refreshOnMap: function(){
-                this.map = {};
-                this.map = new AMap.Map(this.elMap, {
-                    resizeEnable: true,
-                    zoom: 11,
-                    center: [104.049298, 30.546702]
-                });
-                for(var i= 0; i < this.customerList.length; i++){
-                    var marker = new AMap.Marker({
-                        map: this.map,
-                        position: this.customerList[i].coordinates
-                    });
+            // Calculate Distance
+            calDistance: function (aclnglat, cuslnglat) {
+                var lnglat = new AMap.LngLat(aclnglat[0], aclnglat[1]);
+                var distance =lnglat.distance(cuslnglat);
+                if (distance <= 100) {
+                    console.log(distance);
+                    return true;
+                } else {
+                    console.log(distance);
+                    return false;
                 }
-                // ! important set the height of map.
-                $("#x_map_addressInfo").height(800);
             },
 
-            planRoutes: function () {
+            planRoutes: function (postions) {
                 var vm = this;
-                var length = vm.customerList.length;
-                var start = vm.customerList[0].coordinates;
-                var end = vm.customerList[length - 1].coordinates;
+                var length = postions.length;
+                var start = postions[0].actualLngLats;
+                var end = postions[length - 1].actualLngLats;
                 var path = [];
                 for (var i = 1; i < length - 1; i++) {
-                    path.push(vm.customerList[i].coordinates);
+                    path.push(postions[i].actualLngLats);
                 }
 
                 AMap.plugin(["AMap.Driving"], function () {
