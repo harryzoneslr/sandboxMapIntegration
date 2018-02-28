@@ -12,34 +12,48 @@ require( ["Navigation"], function(navigation) {
             elMap: 'x_map_addressInfo',
             DEFAULT_X: 103.56,
             DEFAULT_Y: 30.35,
+            CUST_TYPE_NORMAL: 1,
+            CUST_TYPE_PROSPECT: 2,
             customerList:[
                 {
                     custName:'成都日一新物流',
                     index: 1,
                     address: '成都市青羊区鼓楼南街117号',
                     phone:'028-86512242',
-                    coordinates:[104.0711, 30.6632]
+                    coordinates:[104.0711, 30.6632],
+                    type:1,
+                    typeLabel: '',
+                    typeClass: ''
                 },
                 {
                     custName:'成都天府鑫谷软件园',
                     index: 2,
                     address: '成都市武侯区府城大道西段399号',
                     phone:'028-82345654',
-                    coordinates:[104.0564, 30.5870]
+                    coordinates:[104.0564, 30.5870],
+                    type:2,
+                    typeLabel: '',
+                    typeClass: ''
                 },
                 {
                     custName:'成都软件园E区',
                     index: 3,
                     address: '成都市高新区天府大道1366号天府软件园E区',
                     phone:'028-83245688',
-                    coordinates:[104.0684, 30.5370]
+                    coordinates:[104.0684, 30.5370],
+                    type:2,
+                    typeLabel: '',
+                    typeClass: ''
                 },
                 {
                     custName:'美城云庭住宅区',
                     index: 4,
                     address: '成都市双流区剑南大道南段338号',
                     phone:'028-85295110',
-                    coordinates:[104.0454, 30.5350]
+                    coordinates:[104.0454, 30.5350],
+                    type:1,
+                    typeLabel: '',
+                    typeClass: ''
                 }
             ]
         },
@@ -68,11 +82,25 @@ require( ["Navigation"], function(navigation) {
 
                 // create marker
                 for(var i= 0; i < vm.customerList.length; i++){
-                    var marker = new AMap.Marker({
-                        map: vm.map,
-                        icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
-                        position: vm.customerList[i].coordinates
-                    });
+                    var marker;
+                    vm.setTypeLabel(vm.customerList[i]);
+                    if(vm.customerList[i].type === vm.CUST_TYPE_NORMAL){
+                        marker = new AMap.Marker({
+                            map: vm.map,
+                            icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
+                            position: vm.customerList[i].coordinates
+                        });
+
+
+                    }else{
+                        marker = new AMap.Marker({
+                            map: vm.map,
+                            icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_r'+(i+1)+'.png',
+                            position: vm.customerList[i].coordinates
+                        });
+
+                    }
+
                     var title = "客户名称： " + vm.customerList[i].custName;
                     var content ="联系电话 ：" + vm.customerList[i].phone;
                     marker.content = title + "</br>" + content;
@@ -85,9 +113,24 @@ require( ["Navigation"], function(navigation) {
                         infoWindow.open(e.target.getMap(), e.target.getPosition());
                     });
                     marker.emit('click', {target: marker});
+
                 }
                 // ! important set the height of map.
                 $("#x_map_addressInfo").height(800);
+            },
+
+            /**
+             * Set customer type label by type.
+             */
+            setTypeLabel: function(customer){
+                if(customer.type === this.CUST_TYPE_NORMAL){
+                    customer.typeLabel = "普通客户";
+                    customer.typeClass = "glyphicon glyphicon-star content-green";
+                }
+                if(customer.type === this.CUST_TYPE_PROSPECT){
+                    customer.typeLabel = "潜在客户";
+                    customer.typeClass = "glyphicon glyphicon-star-empty content-red";
+                }
             },
 
             // define infoWindow

@@ -12,10 +12,13 @@ require( ["Navigation"], function(navigation) {
             elMap: 'x_map_addressInfo',
             DEFAULT_X: 103.56,
             DEFAULT_Y: 30.35,
+            // Constants distance standards (m)
+            DISTANCE_STANDARD:100,
             customerList:[
                 {
                     custName:'成都日一新物流',
                     index: 1,
+                    visitTime: '10:24am',
                     address: '成都市青羊区鼓楼南街117号',
                     phone:'028-86512242',
                     coordinates:[104.0711, 30.6632]
@@ -23,6 +26,7 @@ require( ["Navigation"], function(navigation) {
                 {
                     custName:'成都天府鑫谷软件园',
                     index: 2,
+                    visitTime: '11:25am',
                     address: '成都市武侯区府城大道西段399号',
                     phone:'028-82345654',
                     coordinates:[104.0564, 30.5870]
@@ -30,6 +34,7 @@ require( ["Navigation"], function(navigation) {
                 {
                     custName:'成都软件园E区',
                     index: 3,
+                    visitTime: '02:37pm',
                     address: '成都市高新区天府大道1366号天府软件园E区',
                     phone:'028-83245688',
                     coordinates:[104.0684, 30.5370]
@@ -37,52 +42,19 @@ require( ["Navigation"], function(navigation) {
                 {
                     custName:'美城云庭住宅区',
                     index: 4,
+                    visitTime: '04:16pm',
                     address: '成都市双流区剑南大道南段338号',
                     phone:'028-85295110',
                     coordinates:[104.0454, 30.5350]
                 }
             ],
-            VisitRoute:[
+            salesMan:
                 {
-                    employeeID:'i349035',
+                    employeeId:'i349035',
+                    employeeName:'李小刚',
                     index: 1,
-                    visitDate: '2018-01-31'
+                    visitDate: '2018-02-28'
                 }
-            ],
-            VisitRecord: [
-                {
-                    index: 1,
-                    visitTime: '10:24am',
-                    actualLngLats: [104.0721, 30.6633],
-                    customerName: '成都日一新物流',
-                    customerLngLats: [104.0711, 30.6632],
-                    checkStatus: ''
-                },
-                {
-                    index: 2,
-                    visitTime: '11:25am',
-                    actualLngLats: [104.0566, 30.5880],
-                    customerName: '成都天府鑫谷软件园',
-                    customerLngLats: [104.0564, 30.5870],
-                    checkStatus: ''
-                },
-                {
-                    index: 3,
-                    visitTime: '10:24am',
-                    actualLngLats: [104.0683, 30.5360],
-                    customerName: '成都软件园E区',
-                    customerLngLats: [104.0684, 30.5370],
-                    checkStatus: ''
-                },
-                {
-                    index: 4,
-                    visitTime: '10:24am',
-                    actualLngLats: [104.0464, 30.5350],
-                    customerName: '美城云庭住宅区',
-                    customerLngLats: [104.0454, 30.5350],
-                    checkStatus: ''
-                }
-            ]
         },
 
         ready: function () {
@@ -102,26 +74,23 @@ require( ["Navigation"], function(navigation) {
                     center: [104.049298, 30.546702]
                 });
 
+                vm.salesMan.employeeId = 'i00101';
+                vm.salesMan.employeeName = '李小刚';
+                vm.salesMan.visitDate = '2018-02-28';
+
+
                 // create marker
-                for(var i= 0; i < vm.VisitRecord.length; i++){
+                for(var i= 0; i < vm.customerList.length; i++){
                     // check status
-                    vm.VisitRecord[i].checkStatus = vm.calDistance(vm.VisitRecord[i].actualLngLats, vm.VisitRecord[i].customerLngLats);
+
                     var title = "客户名称： " + vm.customerList[i].custName;
                     var content ="联系电话 ：" + vm.customerList[i].phone;
-                    var flag = vm.VisitRecord[i].checkStatus;
-                    if (flag) {
-                        var marker = new AMap.Marker({
-                            map: vm.map,
-                            icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
-                            position: vm.VisitRecord[i].customerLngLats
-                        });
-                    } else {
-                        var marker = new AMap.Marker({
-                            map: vm.map,
-                            icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_r'+(i+1)+'.png',
-                            position: vm.VisitRecord[i].customerLngLats
-                        });
-                    }
+
+                    var marker = new AMap.Marker({
+                        map: vm.map,
+                        icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
+                        position: vm.customerList[i].coordinates
+                    });
                     marker.content = title + "</br>" + content;
                     marker.on('click', function (e) {
                         var infoWindow = new AMap.InfoWindow({
@@ -134,33 +103,22 @@ require( ["Navigation"], function(navigation) {
                     marker.emit('click', {target: marker});
                 }
 
-                vm.planRoutes(vm.VisitRecord);
+                vm.planRoutes(vm.customerList);
 
                 // ! important set the height of map.
                 $("#x_map_addressInfo").height(800);
             },
 
-            // Calculate Distance
-            calDistance: function (aclnglat, cuslnglat) {
-                var lnglat = new AMap.LngLat(aclnglat[0], aclnglat[1]);
-                var distance =lnglat.distance(cuslnglat);
-                if (distance <= 100) {
-                    console.log(distance);
-                    return true;
-                } else {
-                    console.log(distance);
-                    return false;
-                }
-            },
 
-            planRoutes: function (postions) {
+
+            planRoutes: function (customerList) {
                 var vm = this;
-                var length = postions.length;
-                var start = postions[0].actualLngLats;
-                var end = postions[length - 1].actualLngLats;
+                var length = customerList.length;
+                var start = customerList[0].coordinates;
+                var end = customerList[length - 1].coordinates;
                 var path = [];
                 for (var i = 1; i < length - 1; i++) {
-                    path.push(postions[i].actualLngLats);
+                    path.push(customerList[i].coordinates);
                 }
 
                 AMap.plugin(["AMap.Driving"], function () {

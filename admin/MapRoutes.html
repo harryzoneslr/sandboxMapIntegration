@@ -36,8 +36,8 @@
         <!-- LOGO -->
         <div class="topbar-left">
             <div class="text-center">
-                <a href="index2.html" class="logo">
-                    <i class="md-perm-data-setting"></i> <span>Auto Navi Map</span>
+                <a href="MapMarkers.html" class="logo">
+                    <i class="md-perm-data-setting"></i> <span>Map Sandbox</span>
                 </a>
             </div>
         </div>
@@ -198,10 +198,75 @@
                     <div class="tab-pane active" id="tab_basic">
 
                         <div id="x_data_List" class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="portlet">
                                     <div class=" portlet-heading bg-lightgrey">
-                                        <h3 class="portlet-title ">客户信息</h3>
+                                        <h3 class="portlet-title ">销售人员信息</h3>
+                                        <div class="portlet-widgets">
+                                            <a href="javascript:;" data-toggle="reload">
+                                                <i class="ion-refresh"></i>
+                                            </a><span class="divider"></span>
+                                            <a href="#bg_salesman" data-toggle="collapse">
+                                                <i class="ion-minus-round"></i>
+                                            </a><span class="divider"></span>
+                                            <a href="#" data-toggle="remove">
+                                                <i class="ion-close-round"></i>
+                                            </a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div id="bg_salesman" class=" panel-collapse collapse in">
+                                        <div class="portlet-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <form class="form-horizontal" action="#" data-parsley-validate novalidate role="form">
+                                                        <div class="form-group">
+                                                            <label id="x_label_id" class="col-md-3 control-label">销售工号</label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" parsley-trigger="change" parsley-type="email" required class="form-control"
+                                                                       v-model="salesMan.employeeId" value="">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <form class="form-horizontal" action="#" data-parsley-validate novalidate role="form">
+                                                        <div class="form-group">
+                                                            <label id="x_label_hostFlag" class="col-md-3 control-label">销售姓名</label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" parsley-trigger="change" parsley-type="email" required class="form-control"
+                                                                       v-model="salesMan.employeeName" value="">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <form class="form-horizontal" action="#" data-parsley-validate novalidate role="form">
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">拜访日期</label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" parsley-trigger="change" parsley-type="email" required class="form-control"
+                                                                       v-model="salesMan.visitDate" value="">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="portlet">
+                                    <div class=" portlet-heading bg-lightgrey">
+                                        <h3 class="portlet-title ">销售人员信息</h3>
                                         <div class="portlet-widgets">
                                             <a href="javascript:;" data-toggle="reload">
                                                 <i class="ion-refresh"></i>
@@ -215,31 +280,37 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
+
+
                                     <div id="bg_customerTable" class=" panel-collapse collapse in">
                                         <div class="portlet-body">
                                             <div class="row">
                                                 <table id="x_table_zoneDefinition" class=" table table-striped table-hover">
                                                     <thead>
                                                     <tr>
-                                                        <th>客户编号</th>
+                                                        <th>访问顺序</th>
                                                         <th>客户名称</th>
-                                                        <th>联系电话</th>
-                                                        <th>地址</th>
+                                                        <th>拜访时间</th>
+                                                        <th>打卡误差(m)</th>
+                                                        <th>拜访状态</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr v-for="(index,customer) in customerList">
+                                                    <tr v-for="(index,visitRecord) in visitRecords">
                                                         <td>{{index + 1}}
                                                         </td>
-                                                        <td>{{ customer.custName }}</td>
-                                                        <td>{{ customer.phone }}</td>
-                                                        <td>{{ customer.address }}</td>
+                                                        <td>{{ visitRecord.customerName }}</td>
+                                                        <td>{{ visitRecord.visitTime }}</td>
+                                                        <td>{{ visitRecord.distance }}</td>
+                                                        <th><i class="{{ visitRecord.checkStatusClass }}"></i>
+                                                            &nbsp;&nbsp;{{ visitRecord.checkStatusLabel }}</th>
                                                     </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -311,6 +382,7 @@
 <script src="assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
 <script src="assets/js/jquery.core.js"></script>
 <script src="assets/js/jquery.app.js"></script>
+<script src="assets/plugins/vue-calendar/vue-calendar.js"></script>
 <script src="js/jquery.i18n.properties.min.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/vue-resource.js"></script>
@@ -329,8 +401,6 @@
 <script src="js/Map1.js"></script>
 <script src="js/MapRoutes.js"></script>
 
-
-<script src="assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
 </body>
 
 </html>

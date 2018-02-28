@@ -23,9 +23,7 @@ require( ["Navigation",  "Def", "Shoe","Navi"], function(navigation, def, shoe, 
             var local2 = shoe;
             var shirt = def;
             navigation.loadNavigation($('#sidebar-menu'), 'MapBasic');
-            // Connection the web socket
-            var vm = this;
-            vm.map = new AMap.Map('x_map_addressInfo', {
+            this.map = new AMap.Map('x_map_addressInfo', {
                 resizeEnable: true,
                 zoom: 11,
                 center: [104.049298, 30.546702]
@@ -34,10 +32,7 @@ require( ["Navigation",  "Def", "Shoe","Navi"], function(navigation, def, shoe, 
                 icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
                 position: [104.049298, 30.546702]
             });
-            marker0.setMap(vm.map);
-
-
-
+            marker0.setMap(this.map);
 
             var aRoutingOption = [];
             var union1 = [];

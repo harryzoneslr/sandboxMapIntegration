@@ -7,7 +7,7 @@
     <meta name="description" content="Thorstein Application"/>
     <meta name="author" content="EnnovTech co,ltd"/>
     <link rel="shortcut icon" href="assets/images/favicon_1.ico"/>
-    <title>客户拜访情况</title>
+    <title>拜访轨迹追踪</title>
     <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-sweetalert/sweet-alert.css"/>
     <link rel="stylesheet" href="assets/plugins/bootstrap-sweetalert/sweet-alert.css"/>
     <link rel="stylesheet" href="assets/plugins/magnific-popup/dist/magnific-popup.css"/>
@@ -291,18 +291,19 @@
                                                         <th>访问顺序</th>
                                                         <th>客户名称</th>
                                                         <th>拜访时间</th>
-                                                        <th>客户电话</th>
-                                                        <th>客户地址</th>
+                                                        <th>打卡误差(m)</th>
+                                                        <th>拜访状态</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr v-for="(index,customer) in customerList">
+                                                    <tr v-for="(index,visitRecord) in visitRecords">
                                                         <td>{{index + 1}}
                                                         </td>
-                                                        <td>{{ customer.custName }}</td>
-                                                        <td>{{ customer.visitTime }}</td>
-                                                        <td>{{ customer.phone }}</td>
-                                                        <th>{{ customer.address }}</th>
+                                                        <td>{{ visitRecord.customerName }}</td>
+                                                        <td>{{ visitRecord.visitTime }}</td>
+                                                        <td>{{ visitRecord.distance }}</td>
+                                                        <th><i class="{{ visitRecord.checkStatusClass }}"></i>
+                                                            &nbsp;&nbsp;{{ visitRecord.checkStatusLabel }}</th>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -393,12 +394,14 @@
 <script src="assets/plugins/parsleyjs/dist/parsley.min.js"></script>
 <script src="assets/plugins/parsleyjs/dist/zh_cn.js"></script>
 <script src="js/DataTable.init.js"></script>
+<script src="http://webapi.amap.com/maps?v=1.3&key=ef8de0d01c4263763b129524268dfc5b&plugin=AMap.Autocomplete,AMap.PlaceSearch"></script>
+<script src="http://webapi.amap.com/ui/1.0/main.js"></script>
 <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
-<script src="http://webapi.amap.com/maps?v=1.3&key=ef8de0d01c4263763b129524268dfc5b"></script>
+
 <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
 <script data-main="js/application.js" src="js/require.js"></script>
 <script src="js/Map1.js"></script>
-<script src="js/MapVisits.js"></script>
+<script src="js/MapPolyline.js"></script>
 
 </body>
 

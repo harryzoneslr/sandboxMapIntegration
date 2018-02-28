@@ -37,8 +37,8 @@
             <!-- LOGO -->
             <div class="topbar-left">
                 <div class="text-center">
-                    <a href="index2.html" class="logo">
-                        <i class="md-perm-data-setting"></i> <span>Auto Navi Map</span>
+                    <a href="MapMarkers.html" class="logo">
+                        <i class="md-perm-data-setting"></i> <span>Map Sandbox</span>
                     </a>
                 </div>
             </div>
@@ -199,6 +199,7 @@
                            <div class="tab-pane active" id="tab_basic">
 
                                <div id="x_data_List" class="row">
+
                                    <div class="col-lg-12">
                                        <div class="portlet">
                                            <div class=" portlet-heading bg-lightgrey">
@@ -224,6 +225,7 @@
                                                            <tr>
                                                                <th>客户编号</th>
                                                                <th>客户名称</th>
+                                                               <th>客户类型</th>
                                                                <th>联系电话</th>
                                                                <th>地址</th>
                                                            </tr>
@@ -233,6 +235,8 @@
                                                                <td>{{index + 1}}
                                                                </td>
                                                                <td>{{ customer.custName }}</td>
+                                                               <td><i class="{{ customer.typeClass }}"></i>
+                                                                   &nbsp;&nbsp;{{ customer.typeLabel }}</td>
                                                                <td>{{ customer.phone }}</td>
                                                                <td>{{ customer.address }}</td>
                                                            </tr>

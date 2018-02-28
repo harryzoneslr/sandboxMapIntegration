@@ -7,25 +7,35 @@ define('Navigation', function() {
                 navigationList:[
                     {
                         "id":"AutoNaviMap",
-                        "text": "Auto Navi Map",
+                        "text": "高德地图",
                         "icon":"ion-wrench",
                         "subNavigationList":[
                             {
                                 "id":"MapMarkers",
                                 "url":"MapMarkers.html",
-                                "text":"Markers in Map"
-                            },
-                            {
-                                "id":"MapRoutes",
-                                "url":"MapRoutes.html",
-                                "text":"Driving Routes"
+                                "text":"地图标记"
                             },
                             {
                                 "id":"MapVisits",
                                 "url":"MapVisits.html",
-                                "text":"Visits Record"
+                                "text":"路线规划"
+                            },
+                            {
+                                "id":"MapRoutes",
+                                "url":"MapRoutes.html",
+                                "text":"客户拜访情况"
+                            },
+                            {
+                                "id":"MapPolyline",
+                                "url":"MapPolyline.html",
+                                "text":"拜访路线追踪"
                             }
                         ]
+                    },
+                    {
+                        "id": "GoogleMap",
+                        "text": "Google Map",
+                        "icon": "ion-wrench"
                     }
                 ]
 
